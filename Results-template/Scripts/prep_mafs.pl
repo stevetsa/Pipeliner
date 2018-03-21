@@ -5,7 +5,9 @@ use List::Util 'shuffle';
 #INPUT
 
 my $finalmaf = $ARGV[1] . '_out/oncotator_out/' . $ARGV[1] . '_merged.maf'; #to fix...
+my $filtmaf = $ARGV[1] . '_out/oncotator_out/' . $ARGV[1] . '_filtered.maf'; #to fix...
 open C, ">$finalmaf";
+open D, ">$filtmaf";
 #print C "Chromosome\tRead_1_Start\tRead_2_Start\tHighCounts\tLowCounts\tHomozygous_informative\tHeterozygous_informative\tComps\tHighProp\tLowProp\tWinner\n";
 
 my $maffile = $ARGV[0]; #to fix...
@@ -56,7 +58,7 @@ push @hugoid, $gene;
 push @count, $muts;
 
 
-open G, "<$fixedmaf";
+open G, "<$sortedmaf";
 while (<G>){
 	chomp;
   	last if m/^$/;
@@ -78,61 +80,56 @@ while (<G>){
 	}
 }
 
-#if ($ARGV[1] eq 'mutect2'){
-
 print C "$header\ttumor_freq\tNonsilent_gene_mutation_count\n";
 
 my $a = 0;
+my $pos=0;
+my $d=0;
 for ($a = 0; $a < @variants; $a++) {
-	my $d=0;
 	my $genecount=0;
-	for ($d=0; $d<@hugoid; $d++) {
+	for ($d=$pos; $d<@hugoid; $d++) {
 		@line=split "\t", $variants[$a];
 		if ($hugoid[$d] eq $line[0]) {
 			$genecount=$count[$d];
+			$pos=$d;
 			last;
 		}
 	}
 	print C "$variants[$a]\t$freq[$a+1]\t$genecount\n";
 }
-#}
-
-#elsif ($ARGV[1] eq 'mutect'){
-
-#print C "$header\ttumor_freq\tNonsilent_gene_mutation_count\n";
-
-#my $a = 0;
-#for ($a = 0; $a < @variants; $a++) {
-#	my $d=0;
-#	my $genecount=0;
-#	for ($d=0; $d<@hugoid; $d++) {
-#		@line=split "\t", $variants[$a];
-#		if ($hugoid[$d] eq $line[0]) {
-#			$genecount=$count[$d];
-#			last;
-#		}
-#	}
-#	print C "$variants[$a]\t$freq[$a+1]\t$genecount\n";
-#}
-#}
-
-#else {
-
-#print C "$header\tNonsilent_gene_mutation_count\n";
-
-#my $a = 0;
-#for ($a = 0; $a < @variants; $a++) {
-#	my $d=0;
-#	my $genecount=0;
-#	for ($d=0; $d<@hugoid; $d++) {
-#		@line=split "\t", $variants[$a];
-#		if ($hugoid[$d] eq $line[0]) {
-#			$genecount=$count[$d];
-#			last;
-#		}
-#	}
-#	print C "$variants[$a]\t$genecount\n";
-#}
-#}
 close C;
 close G;
+
+my @columns=(split "\t",$header);
+my $col='';
+
+my $z=0;
+for ($z=0; $z<@columns; $z++) {
+	if ($columns[$z] eq 'ExAC_AF') {
+		$col=$z;
+		last;
+	}
+}
+
+open F, "<$finalmaf";
+while (<F>){
+	chomp;
+  	last if m/^$/;
+  	@line = split "\t", $_;
+	if ($line[0] eq 'Hugo_Symbol') {
+		print D "$_\n";
+	}
+	else {
+		if ($line[$z] eq '-') {
+			print D "$_\n";
+		}
+		else {
+			if ($line[$z] <= 0.001) {
+				print D "$_\n";
+			}
+		}
+	}
+}
+
+close D;
+close F;

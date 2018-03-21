@@ -26,7 +26,7 @@
         "SAMTOOLS": "/usr/local/apps/samtools/1.3.1/bin/samtools",
         "BAMTOOLS": "/usr/local/apps/bamtools/2.3.0/bin/bamtools",
         "BEDTOOLS": "/usr/local/apps/bedtools/2.19.0/bin/bedtools",
-        "QUALIMAP": "export JAVA_OPTS='-Djava.awt.headless=true -Djava.io.tmpdir=/lscratch/$SLURM_JOBID'; /usr/local/apps/qualimap/qualimap_v2.2/qualimap --java-mem-size=64G",
+        "QUALIMAP": "export JAVA_OPTS='-Djava.awt.headless=true -Djava.io.tmpdir=/lscratch/$SLURM_JOBID'; /usr/local/apps/qualimap/qualimap_v2.2.1/qualimap --java-mem-size=96G",
         "STAR": "/usr/local/apps/STAR/2.4.0h/bin/Linux_x86_64/STAR",
         "SNPEFF": "java -Xmx24g -Djava.io.tmpdir=/lscratch/$SLURM_JOBID -jar /usr/local/apps/snpEff/4.2/snpEff.jar",
         "SNPSIFT": "java -Xmx24g -Djava.io.tmpdir=/lscratch/$SLURM_JOBID -jar /usr/local/apps/snpEff/4.2/SnpSift.jar",
@@ -34,7 +34,7 @@
         "MUTECT": "module load java/1.7.0_25; java -Xmx16g -Djava.io.tmpdir=/lscratch/$SLURM_JOBID -jar /usr/local/apps/muTect/2014-12-15/muTect-1.1.7.jar",
 #        "SVDETECT": "/data/CCBR_Pipeliner/local/apps",
 #        "BICSEQ": "/data/CCBR_Pipeliner/local/apps/BIC-seq.pl",
-        "BWA": "/usr/local/apps/bwa/0.7.15/bwa",
+        "BWA": "/usr/local/apps/bwa/0.7.17/bwa",
         "FASTQ_SCREEN": "/data/CCBR_Pipeliner/db/PipeDB/bin/fastq_screen_v0.9.3/fastq_screen"
     },
     "genomeseq": {
@@ -71,7 +71,7 @@
         "MUTECT": "module load java/1.7.0_25; java -Xmx16g -Djava.io.tmpdir=/lscratch/$SLURM_JOBID -jar /usr/local/apps/muTect/2014-12-15/muTect-1.1.7.jar",
 #        "SVDETECT": "/data/CCBR_Pipeliner/local/apps",
 #        "BICSEQ": "/data/CCBR_Pipeliner/local/apps/BIC-seq.pl",
-        "BWA": "/usr/local/apps/bwa/0.7.15/bwa",
+        "BWA": "/usr/local/apps/bwa/0.7.17/bwa",
         "FASTQ_SCREEN": "/data/CCBR_Pipeliner/db/PipeDB/bin/fastq_screen_v0.9.3/fastq_screen"
     },
 	 "rnaseq": {
@@ -120,7 +120,7 @@
         "WINDOWQUALITY": 27,
     },
 	"FASTQ_SCREEN": "/data/CCBR_Pipeliner/db/PipeDB/bin/fastq_screen_v0.9.3/fastq_screen",
-    "ONCOFUSE": "java -Xmx24g -jar /data/CCBR/apps/oncofuse-1.1.1/Oncofuse.jar",
+    "ONCOFUSE": "java -Xmx24g -jar /data/CCBR_Pipeliner/db/PipeDB/bin/oncofuse-1.1.1/Oncofuse.jar",
 	"PYTHONPATH": "/data/CCBR_Pipeliner/db/PipeDB/bin/lib/python3.4/site-packages/",
         "MULTIQC":"multiqc/1.1", 
         "CONFMULTIQC": "/data/CCBR_Pipeliner/db/PipeDB/Rnaseq/multiqc_config.yaml",    
@@ -228,7 +228,7 @@
     "SNPSIFT": "java -Xmx24g -Djava.io.tmpdir=/lscratch/$SLURM_JOBID -jar /usr/local/apps/snpEff/4.2/SnpSift.jar",
     "FIRSTANNO": "Scripts/vcfAnnFirst_snpEff.py",
     "MUTECT": "module load java/1.7.0_25; java -Xmx16g -Djava.io.tmpdir=/lscratch/$SLURM_JOBID -jar /usr/local/apps/muTect/2014-12-15/muTect-1.1.7.jar",
-    "BWA": "/usr/local/apps/bwa/0.7.15/bwa",
+    "BWA": "/usr/local/apps/bwa/0.7.17/bwa",
     "FASTQ_SCREEN": "/data/CCBR_Pipeliner/db/PipeDB/bin/fastq_screen_v0.9.3/fastq_screen",
     "PYTHONPATH": "/data/CCBR_Pipeliner/db/PipeDB/bin/lib/python3.4/site-packages/",
     "MULTIQC":"multiqc/0.9dev0", 

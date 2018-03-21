@@ -14,7 +14,7 @@ if config['project']['annotation'] == "hg19":
             config['project']['workpath']+"/cnvkit_out/CNVkit_summary_heatmap.pdf",
             config['project']['workpath']+"/sample_network.bmp",
             config['project']['workpath']+"/mutect2_out/mutect2_variants.database",
-            config['project']['workpath']+"/mutect2_out/oncotator_out/mutect2_variants.maf",
+            config['project']['workpath']+"/mutect2_out/oncotator_out/mutect2_filtered.maf",
             config['project']['workpath']+"/mutect2_out/mutsigCV_out/somatic.sig_genes.txt",
             config['project']['workpath']+"/exome_targets.bed",
             expand("manta_out/{s}/results/variants/candidateSV.vcf.gz", s=samples),
@@ -22,7 +22,7 @@ if config['project']['annotation'] == "hg19":
     output:
     params: rname="final"
     shell:  """
-             module load multiqc/1.1; multiqc -f -e featureCounts .; mv *.out slurmfiles/; perl Scripts/summarize_usage.pl; mv *.fin.bam.intervals logfiles/; rm *realign.bai; mv distance.cluster0 distance.cluster1 distance.cluster2 distance.cluster3 distance.nosex samples.txt plink.map plink.ped logfiles/
+             module load multiqc/1.3; multiqc -f -e featureCounts .; mv *.out slurmfiles/; perl Scripts/summarize_usage.pl; mv *.fin.bam.intervals logfiles/; rm *realign.bai; mv distance.cluster0 distance.cluster1 distance.cluster2 distance.cluster3 distance.nosex samples.txt plink.map plink.ped logfiles/
 
             """
 
@@ -42,7 +42,7 @@ elif config['project']['annotation'] == "hg38":
             config['project']['workpath']+"/cnvkit_out/CNVkit_summary_heatmap.pdf",
             config['project']['workpath']+"/sample_network.bmp",
             config['project']['workpath']+"/mutect2_out/mutect2_variants.database",
-            config['project']['workpath']+"/mutect2_out/oncotator_out/mutect2_variants.maf",
+            config['project']['workpath']+"/mutect2_out/oncotator_out/mutect2_filtered.maf",
             config['project']['workpath']+"/mutect2_out/mutsigCV_out/somatic.sig_genes.txt",
             config['project']['workpath']+"/exome_targets.bed",
             expand("manta_out/{s}/results/variants/candidateSV.vcf.gz", s=samples),
@@ -50,7 +50,7 @@ elif config['project']['annotation'] == "hg38":
     output:
     params: rname="final"
     shell:  """
-             module load multiqc/1.1; multiqc -f -e featureCounts .; mv *.out slurmfiles/; perl Scripts/summarize_usage.pl; mv *.fin.bam.intervals logfiles/; rm *realign.bai; mv distance.cluster0 distance.cluster1 distance.cluster2 distance.cluster3 distance.nosex samples.txt plink.map plink.ped logfiles/
+             module load multiqc/1.3; multiqc -f -e featureCounts .; mv *.out slurmfiles/; perl Scripts/summarize_usage.pl; mv *.fin.bam.intervals logfiles/; rm *realign.bai; mv distance.cluster0 distance.cluster1 distance.cluster2 distance.cluster3 distance.nosex samples.txt plink.map plink.ped logfiles/
 
             """
             
@@ -69,7 +69,7 @@ elif config['project']['annotation'] == "mm10":
             config['project']['workpath']+"/mutect2_out/mutect2_oncoplot.pdf",
             config['project']['workpath']+"/mutect2_out/mutect2_variants.database",
             config['project']['workpath']+"/sample_network.bmp",
-#            config['project']['workpath']+"/mutect2_out/oncotator_out/mutect2_variants.maf",
+#            config['project']['workpath']+"/mutect2_out/oncotator_out/mutect2_filtered.maf",
             config['project']['workpath']+"/mutect2_out/mutsigCV_out/somatic.sig_genes.txt",
             config['project']['workpath']+"/exome_targets.bed",
             expand("manta_out/{s}/results/variants/candidateSV.vcf.gz", s=samples),
@@ -77,6 +77,6 @@ elif config['project']['annotation'] == "mm10":
     output:
     params: rname="final"
     shell:  """
-             module load multiqc/1.1; multiqc -f -e featureCounts .; mv *.out slurmfiles/; perl Scripts/summarize_usage.pl; mv *.fin.bam.intervals logfiles/; rm *realign.bai; mv distance.cluster0 distance.cluster1 distance.cluster2 distance.cluster3 distance.nosex samples.txt plink.map plink.ped logfiles/
+             module load multiqc/1.3; multiqc -f -e featureCounts .; mv *.out slurmfiles/; perl Scripts/summarize_usage.pl; mv *.fin.bam.intervals logfiles/; rm *realign.bai; mv distance.cluster0 distance.cluster1 distance.cluster2 distance.cluster3 distance.nosex samples.txt plink.map plink.ped logfiles/
 
             """
