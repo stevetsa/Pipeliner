@@ -1,0 +1,7 @@
+
+#snakemake
+numpy
+pandas
+pysam
+matplotlib
+
