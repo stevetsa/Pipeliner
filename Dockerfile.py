@@ -33,3 +33,26 @@ WORKDIR /opt
 RUN git clone https://github.com/stevetsa/Pipeliner.git
 RUN cp /opt/Pipeliner/Results-template/Scripts/*.py /opt/.
 #RUN cp /opt/*.py /usr/local/bin
+
+### Add RSEM
+RUN apt-get install -y zlib1g-dev perl r-base locales
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
+ENV LANG en_US.UTF-8 
+
+
+WORKDIR /opt
+RUN wget https://github.com/deweylab/RSEM/archive/v1.2.31.tar.gz
+RUN tar xvzf v1.2.31.tar.gz
+WORKDIR /opt/RSEM-1.2.31
+RUN make
+RUN make ebseq
+RUN make install
+RUN cp rsem-* /usr/local/bin
+RUN cp EBSeq/rsem-* /usr/local/bin
+RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("EBSeq")'
+
+
+COPY Dockerfile.py /opt
