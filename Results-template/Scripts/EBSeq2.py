@@ -52,7 +52,7 @@ for i in range(0,len(contrasts),2):
     cmd.append(ebseqfile)
     cmd=" ".join(cmd)
     print("RUNNING COMMAND:\n", cmd)
-    sys.exit()
+#    sys.exit()
     os.system(cmd)
     x=pd.read_csv(ebseqfile,sep="\t",header=0)
     x.index.name="transcriptID"
