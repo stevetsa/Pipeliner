@@ -45,7 +45,7 @@ for i in range(0,len(contrasts),2):
     cmd.append("rsem-run-ebseq")
     if itype=="isoform":
     	cmd.append("--ngvector")
-    	cmd.append(rsemref+".transcripts.ngvec")
+    	cmd.append(rsemref)
     cmd.append(cmfile)
     cmd.append("%d,%d"%(len(condition2sampleName[contrasts[i]]),len(condition2sampleName[contrasts[i+1]])))
     cmd.append(ebseqfile)
