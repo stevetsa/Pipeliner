@@ -35,7 +35,7 @@ RUN cp Results-template/Scripts/*.Rmd /opt/.
 COPY render_rmd.R /opt/.
 RUN Rscript /opt/render_rmd.R
 
-RUN apt-get update && apt-get install -y pandoc
+RUN apt-get update && apt-get install -y pandoc python3
 COPY install.packages3.R /opt/.
 RUN Rscript /opt/install.packages3.R
 
