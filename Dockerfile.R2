@@ -26,6 +26,10 @@ RUN apt-get update \
 #RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite()'
 #COPY install.packages.R /opt/.
 #RUN Rscript /opt/install.packages.R
+RUN apt-get update && apt-get install -y pandoc python3
+COPY install.packages3.R /opt/.
+RUN Rscript /opt/install.packages3.R
+
 WORKDIR /opt
 RUN git clone https://github.com/stevetsa/Pipeliner.git
 WORKDIR /opt/Pipeliner
@@ -35,8 +39,8 @@ RUN cp Results-template/Scripts/*.Rmd /opt/.
 COPY render_rmd.R /opt/.
 RUN Rscript /opt/render_rmd.R
 
-RUN apt-get update && apt-get install -y pandoc python3
-COPY install.packages3.R /opt/.
-RUN Rscript /opt/install.packages3.R
+#RUN apt-get update && apt-get install -y pandoc python3
+#COPY install.packages3.R /opt/.
+#RUN Rscript /opt/install.packages3.R
 
 ENV PATH="$PATH:/opt"

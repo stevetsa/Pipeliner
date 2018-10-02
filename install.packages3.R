@@ -1,4 +1,4 @@
-install.packages(c("colorspace", "dendsort", "pheatmap", "tidyverse", "RColorBrewer", "argparse", "proto", "findpython", "getopt", "jsonlite"), dependencies=TRUE)
+install.packages(c("colorspace", "dendsort", "pheatmap", "tidyverse", "RColorBrewer", "argparse", "proto", "findpython", "getopt", "jsonlite", "knitr"), dependencies=TRUE)
 source("https://bioconductor.org/biocLite.R")
 biocLite()
 #biocLite("rtracklayer")
