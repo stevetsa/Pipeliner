@@ -5,10 +5,10 @@ biocLite()
 #library(rtracklayer)
 #biocLite(c("edgeR", "limma", "scran", "GSEABase", "GSVA", "ReactomePA", "clusterProfiler", "genefilter", "maftools", "org.Hs.eg.db"))
 #biocLite(c("COMBINE-lab/wasabi", "geneplotter", "pachterlab/sleuth", "DOSE", "DESeq2", "scater", "biomaRt", "ChIPseeker", "GenomicFeatures", "AnnotationDbi"))
-install.packages("reticulate")
-library(reticulate)
+#install.packages("reticulate")
+#library(reticulate)
 #conda_install("env", "python=3.6")
-conda_install("python=3.6")
+
 #install.packages(c("dendsort", "argparse"), dependencies=TRUE)
 
 #library(colorspace)
