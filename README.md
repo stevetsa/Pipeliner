@@ -1,8 +1,7 @@
 ## Update  
 This repo was forked from forked from [CCBR/Pipeliner](https://github.com/CCBR/Pipeliner).  
 You can run the Jupyter Notebook (R Kernel) to generate a heatmap for your study by clicking 
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/stevetsa/Pipeliner/master?urlpath=https%3A%2F%2Fgithub.com%2Fstevetsa%2FPipeliner%2Fblob%2Fmaster%2Fbinder%2Fheatmap.R.ipynb)
-
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/stevetsa/Pipeliner/master?urlpath=https%3A%2F%2Fraw.githubusercontent.com%2Fstevetsa%2FPipeliner%2Fmaster%2Fbinder%2Fheatmap.R.ipynb)
 
 
 # Test
