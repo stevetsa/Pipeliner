@@ -44,9 +44,13 @@ ENV LANG en_US.UTF-8
 
 
 WORKDIR /opt
-RUN wget https://github.com/deweylab/RSEM/archive/v1.2.31.tar.gz
-RUN tar xvzf v1.2.31.tar.gz
-WORKDIR /opt/RSEM-1.2.31
+#RUN wget https://github.com/deweylab/RSEM/archive/v1.2.31.tar.gz
+#RUN tar xvzf v1.2.31.tar.gz
+#WORKDIR /opt/RSEM-1.2.31
+
+RUN wget https://github.com/deweylab/RSEM/archive/v1.3.1.tar.gz
+RUN tar xvzf v1.3.1.tar.gz
+WORKDIR /opt/RSEM-1.3.1
 RUN make
 RUN make ebseq
 RUN make install

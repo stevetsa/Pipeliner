@@ -23,22 +23,15 @@ RUN apt-get update \
    libmagick++-dev \
    postgresql postgresql-contrib libpq-dev libudunits2-dev libx11-dev mesa-common-dev libglu1-mesa-dev libhdf5-dev gfortran && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
-#RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite()'
-#COPY install.packages.R /opt/.
-#RUN Rscript /opt/install.packages.R
+
 RUN apt-get update && apt-get install -y pandoc python3
-COPY install.packages3.R /opt/.
-RUN Rscript /opt/install.packages3.R
+COPY install.packages4.R /opt/.
+RUN Rscript /opt/install.packages4.R
 
 WORKDIR /opt
 RUN git clone https://github.com/stevetsa/Pipeliner.git
 WORKDIR /opt/Pipeliner
-#RUN cp Dockerfile* /opt/.
-RUN cp Results-template/Scripts/heatmap2.R /opt/.
-#RUN cp Results-template/Scripts/*.Rmd /opt/.
-#COPY render_rmd.R /opt/.
-#RUN Rscript /opt/render_rmd.R
-
-
-
+RUN cp Dockerfile.R4 /opt/.
+RUN cp Results-template/Scripts/*.R /opt/.
+RUN cp Results-template/Scripts/*.Rmd /opt/.
 ENV PATH="$PATH:/opt"
