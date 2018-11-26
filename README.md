@@ -1,3 +1,9 @@
+## Update  
+This repo was forked from forked from [CCBR/Pipeliner](https://github.com/CCBR/Pipeliner).  
+You can run the Jupyter Notebook (R Kernel) to generate a heatmap for your study by clicking 
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/stevetsa/Pipeliner/master?filepath=binder%2Fheatmap.R.ipynb)
+
+
 # Test
 ##PLEASE CLICK [HERE](https://github.com/CCBR/Pipeliner/blob/master/PipelinerVer1.0_documentation.pdf) TO VIEW/DOWNLOAD THE FULL PIPELINER MANUAL 
 
