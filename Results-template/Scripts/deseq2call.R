@@ -1,22 +1,13 @@
-
-## grab args
+## Wrapper script to grab args
+## Example USAGE: Rscript deseq2call.R 'sampletable.txt' 'RawCountFile_Subread_junctions_filtered.txt' 'TCWT TGWT TCWT HCWT TGWT HGWT TCWT TCKO TGWT TGKO TCKO TGKO TCKO HCKO TGKO HGKO' 'mm10' 'projectid' 'Project Description.' 'Subread_junctions' 
 args <- commandArgs(trailingOnly = TRUE)
-DIR <- args[1]
-#FILE1 <- args[2]
-#FILE2 <- args[3]
-#CONTRASTS <- args[4]
-# Sys.setenv(RSTUDIO_PANDOC="/Applications/RStudio.app/Contents/MacOS/pandoc")
-setwd(DIR) # new 
-  rmarkdown::render("Deseq2Report.Rmd", params = list(
-    folder = args[1],
-    sampleinfo = args[2],
-    data = args[3],
-    contrasts = args[4],
-    species = args[5],
-    projectId = args[6],
-    projectDesc = args[7],
-    gtffile = args[8],
-    dtype = args[9],
-    karyobeds = args[10]
-  ))
-
+#Sys.setenv(RSTUDIO_PANDOC="/path/to/pandoc/installation") #You may need to add this to point to pandocs locatation
+rmarkdown::render("Deseq2Report.Rmd", 
+  params = list(
+    sampleinfo = args[1],
+    data = args[2],
+    contrasts = args[3],
+    species = args[4],
+    projectId = args[5],
+    projectDesc = args[6],
+    dtype = args[7]))
