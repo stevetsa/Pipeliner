@@ -3,13 +3,16 @@ title: "limma results"
 author: "CCBR RNAseq pipeline"
 output: html_document
 params:
+  folder: result
   sampleinfo: sampletable.txt
-  data: RawCountFile_RSEM_genes_filtered.txt
-  contrasts: "KO WT"
-  species: "mm10"
+  data: RawCountFile_genes_filtered.txt
+  contrasts: "GN GP"
+  species: hg19
   projectId: "<projectId>"
   projectDesc: "<desc>"
+  gtffile: "gencode.v19.annotation.gtf"
   dtype: "<count type>"
+  karyobeds: "path/to/karyobedfiles"
 ---
 
 ```{r, include=FALSE, warning=FALSE, message=FALSE}
@@ -69,10 +72,13 @@ knit_hooks$set(webgl = hook_webgl)
 
 
 ## grab args
+
+DIR <- params$folder
 FILE1 <- params$sampleinfo
 FILE2 <- params$data
 CONTRASTS <- params$contrasts
 SPECIES <-params$species
+KARYOBEDS <-params$karyobeds
 
  
 # read files
@@ -263,7 +269,7 @@ mfc=cbind(mfc,final$FC)
 mpval=cbind(mpval,final$P.Value)
 
 ## pathway enrichment --------------------------------------------
-if (SPECIES=="hg19_SKIP_L2P" | SPECIES=="mm10_SKIP_L2P" | SPECIES=="hg38_SKIP_L2P")
+if (SPECIES=="hg19" | SPECIES=="mm10" | SPECIES=="hg38")
 {
 #gup=gene[which(final$PValue<0.05 & final$FC >=1.5)]
 #gdw=gene[which(final$PValue<0.05 & final$FC <=-1.5)]
@@ -358,17 +364,20 @@ gene=apply(array(as.character(x)),1,function(z) unlist(strsplit(z, "\\|"))[2])
 all.genes.con=cbind(ensID,gene,all.genes.con)
 write.table(all.genes.con,file=paste("limma_DEG_",cons[i],"_all_genes.txt",sep=""),sep="\t",col.names=NA)
 
-#Reformatted DEG File
-limmaout=read.table(paste("limma_DEG_",cons[i],"_all_genes.txt",sep=""), header = TRUE)
-limmaout=limmaout[,which(names(limmaout) %in% c("X","gene","logFC","P.Value"))]
-limmaout$fc=2^limmaout$logFC
-down_reg=limmaout$logFC<0
-limmaout$fc[down_reg]=-1/limmaout$fc[down_reg]
-limmaout=limmaout[,c("X","gene","fc","logFC","P.Value")]
-colnames(limmaout)=c("ensid_gene","gene","fc","log2fc","pvalue")
-limmaout$fdr=p.adjust(limmaout$pvalue,method='fdr',n=length(limmaout$pvalue))
-limmaout$gsea_ranking_score=-log10(limmaout$pvalue)*sign(limmaout$log2fc)
-write.table(limmaout,file=paste("limma_DEG_",cons[i],"_all_genes.txt",sep=""),row.names=FALSE,col.names=TRUE,quote=FALSE,sep="\t")
+if ((grepl("hg",SPECIES)||grepl("mm",SPECIES))&&(grepl("genes",params$dtype)))
+{
+system(paste0("cd ",getwd(),"; python ../Scripts/FC2karyo.py limma_DEG_",cons[i],"_all_genes.txt 2 3 ",SPECIES," ",KARYOBEDS," > limma_DEG_",cons[i],".input.karyo"))
+system(paste0("cd ",getwd(),"; python ../Scripts/karyoplot.py limma_DEG_",cons[i],".input.karyo ",SPECIES))
+ki1=paste0("limma_DEG_",cons[i],".input.karyo1.png")
+ki2=paste0("limma_DEG_",cons[i],".input.karyo2.png")
+cat("\n###KARYO PLOT",cons[i],"\n")
+cat("![](",ki1,")")
+#kp1[[i]]<-knitr::include_graphics(paste0("limma_DEG_",cons[i],".input.karyo1.png"))
+cat("\n")
+cat("![](",ki2,")")
+#kp2[[i]]<-knitr::include_graphics(paste0("limma_DEG_",cons[i],".input.karyo2.png"))
+cat("\n\n")
+}
 
 
 }}
@@ -399,3 +408,4 @@ DT::datatable(res, caption=htmltools::tags$caption("DEG for all contrasts",style
 sessionInfo()
 
 ```
+

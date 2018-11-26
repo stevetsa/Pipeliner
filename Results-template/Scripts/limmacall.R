@@ -1,23 +1,15 @@
-
-## grab args
+## Wrapper script to grab args
+## EXAMPLE USAGE: Rscript limmacall.R 'sampletable.txt' 'RawCountFile_RSEM_genes_filtered.txt' 'KO WT' 'mm10' 'limmatest' 'Enter CCBR Project Description and Notes here.' 'RSEM_genes'
+## Parse Args
 args <- commandArgs(trailingOnly = TRUE)
-DIR <- args[1]
-#FILE1 <- args[2]
-#FILE2 <- args[3]
-#CONTRASTS <- args[4]
 # Sys.setenv(RSTUDIO_PANDOC="/Applications/RStudio.app/Contents/MacOS/pandoc")
-setwd(DIR) # new 
-# rmarkdown::render("Scripts/LimmaReport.Rmd", params = list(
 rmarkdown::render("LimmaReport.Rmd", params = list(
-    folder = args[1],
-    sampleinfo = args[2],
-    data = args[3],
-    contrasts = args[4],
-    species = args[5],
-    projectId = args[6],
-    projectDesc = args[7],
-    gtffile = args[8],
-    dtype = args[9],
-    karyobeds = args[10]
-  ))
-
+    sampleinfo = args[1],
+    data = args[2],
+    contrasts = args[3],
+    species = args[4],
+    projectId = args[5],
+    projectDesc = args[6],
+    dtype = args[7]
+  )
+)
