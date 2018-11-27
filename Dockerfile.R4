@@ -5,6 +5,7 @@
 FROM r-base:3.5.1
 #FROM rocker/r-devel:latest
 RUN apt-get update \
+ && apt-get build-dep libcurl4-openssl-dev \
  && apt-get install -y --no-install-recommends \
    libfftw3-dev \
    gcc \
